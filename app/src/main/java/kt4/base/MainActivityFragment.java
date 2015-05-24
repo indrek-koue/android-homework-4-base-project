@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -24,7 +26,8 @@ public class MainActivityFragment extends Fragment {
 
     private static final String TAG = "LOGTAG";
 
-    private final static String REQUEST_URL = "https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&tagged=android&site=stackoverflow";
+    private final static String REQUEST_URL = "https://api.stackexchange.com/2.2/questions?" +
+            "order=desc&sort=activity&tagged=android&site=stackoverflow";
 
     public MainActivityFragment() {
     }
@@ -45,19 +48,31 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
-
                 if (response == null) { return; }
+
                 Log.i(TAG, "Response code: " + response.code());
 
                 String inputJson = response.body().string();
-
-                Log.i(TAG, inputJson);
 
                 QuestionsResponseWrapper QuestionsResponseWrapper = new Gson().fromJson(inputJson,
                         QuestionsResponseWrapper.class);
 
                 for (Question q : QuestionsResponseWrapper.items)
                     Log.d(TAG, q.title);
+
+                final ArrayAdapter<Question> adapter =
+                        new ArrayAdapter<>(getActivity().getBaseContext(),
+                                android.R.layout.simple_list_item_1,
+                                QuestionsResponseWrapper.items);
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ListView listView = (ListView) getActivity().findViewById(R.id.listView);
+                        listView.setAdapter(adapter);
+
+                    }
+                });
 
             }
         });
