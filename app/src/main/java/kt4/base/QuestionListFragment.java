@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
@@ -22,20 +23,26 @@ import kt4.base.model.QuestionsResponseWrapper;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class QuestionListFragment extends Fragment {
 
     private static final String TAG = "LOGTAG";
 
     private final static String REQUEST_URL = "https://api.stackexchange.com/2.2/questions?" +
             "order=desc&sort=activity&tagged=android&site=stackoverflow";
 
-    public MainActivityFragment() {
+    public QuestionListFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        requestQuestions();
+
+        return inflater.inflate(R.layout.fragment_main, container, false);
+    }
+
+    private void requestQuestions() {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder().url(REQUEST_URL).build();
@@ -47,37 +54,39 @@ public class MainActivityFragment extends Fragment {
             }
 
             @Override
-            public void onResponse(com.squareup.okhttp.Response response) throws IOException {
-                if (response == null) { return; }
+            public void onResponse(Response response) throws IOException {
+                if (response == null)
+                    return;
 
                 Log.i(TAG, "Response code: " + response.code());
 
-                String inputJson = response.body().string();
+                QuestionsResponseWrapper parsedResponse = parse(response);
 
-                QuestionsResponseWrapper QuestionsResponseWrapper = new Gson().fromJson(inputJson,
-                        QuestionsResponseWrapper.class);
-
-                for (Question q : QuestionsResponseWrapper.items)
-                    Log.d(TAG, q.title);
-
-                final ArrayAdapter<Question> adapter =
-                        new ArrayAdapter<>(getActivity().getBaseContext(),
-                                android.R.layout.simple_list_item_1,
-                                QuestionsResponseWrapper.items);
-
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ListView listView = (ListView) getActivity().findViewById(R.id.listView);
-                        listView.setAdapter(adapter);
-
-                    }
-                });
+                attachToListview(parsedResponse);
 
             }
         });
+    }
 
-        return inflater.inflate(R.layout.fragment_main, container, false);
+    private void attachToListview(QuestionsResponseWrapper questionsResponseWrapper) {
+        final ArrayAdapter<Question> adapter =
+                new ArrayAdapter<>(getActivity().getBaseContext(),
+                        android.R.layout.simple_list_item_1,
+                        questionsResponseWrapper.items);
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ListView listView = (ListView) getActivity().findViewById(R.id.listView);
+                listView.setAdapter(adapter);
+            }
+        });
+    }
+
+    private QuestionsResponseWrapper parse(Response response) throws IOException {
+        String inputJson = response.body().string();
+        return new Gson().fromJson(inputJson,
+                QuestionsResponseWrapper.class);
     }
 
 }
