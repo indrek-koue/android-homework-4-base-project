@@ -26,13 +26,13 @@ Approximate example what the UI should look like: https://developer.android.com/
 
 ##2)
 Fragment B needs to display these details about each question when item is selected from fragment A:
-*Title
-*Question id
-*View count
-*Answer count
-*Question score
-*Name of user who posted the question
-*Link to a question. 
+* Title
+* Question id
+* View count
+* Answer count
+* Question score
+* Name of user who posted the question
+* Link to a question. 
 
 ##3) 
 When the question link is clicked in fragment B, it has to display the website or directe the user to the question on stackoverflow.com website.
