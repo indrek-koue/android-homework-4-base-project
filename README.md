@@ -5,7 +5,7 @@ For students as a start for their homework nr. 4
 
 #Homework nr. 4
 
-**Due date:** 9. jun 2015  
+**Due date:** 9. june 2015  
 **Submission protocol:** zipped src/main folder and .apk (from project build folder, unaligned or not aligned) to teachers official email.
 
 For this home assignment, you have to use partially built project by me as a base:
