@@ -16,10 +16,10 @@ Current project consist of single fragment (let's call it fragment A) and is con
 Your assignment is to add new features to this project:
 
 ##1)
-Device in landscape:
+**Device in landscape:**  
 Two fragments are displayed side by side (fragment A on left and fragment B on right). If item is clicked in fragment A, details of that question should be displayed in fragment B.
 
-Device in portrait:
+**Device in portrait:**  
 Only single fragment is displayed and when item is selected in fragment A then the fragment B is opened with details.
 
 Approximate example what the UI should look like: https://developer.android.com/images/training/basics/fragments-screen-mock.png
@@ -39,7 +39,6 @@ When the question link is clicked in fragment B, it has to display the website o
 
 ##4)
 During each loading a loading indicator has to be displayed and when the loading is done the indicator needs to be hidden. You can use whatever view or widget to indicate loading (I would recommend ProgressBar).
-
 
 ##5)
 Button “next” and button “previous” in fragment A which select pages forward and backwards. When the button is clicked, new request with the correct page number is made and new data loaded and displayed in the list.
