@@ -1,19 +1,14 @@
 # android-homework-4-base-project
-For students as a start for their homework nr. 4
+For students as a start for their homework nr. 4  
 
-
+Current project consist of single fragment (let's call it fragment A) and is connected to Stackoverflow API to retrieve questions by android tag.
 
 #Homework nr. 4
 
 **Due date:** 9. june 2015  
 **Submission protocol:** zipped src/main folder and .apk (from project build folder, unaligned or not aligned) to teachers official email.
 
-For this home assignment, you have to use partially built project by me as a base:
-https://github.com/indrek-koue/android-homework-4-base-project
-
-Current project consist of single fragment (let's call it fragment A) and is connected to Stackoverflow API to retrieve questions by android tag.
-
-Your assignment is to add new features to this project:
+Download this project and add **new** features to **this project**:
 
 ##1)
 **Device in landscape:**  
