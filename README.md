@@ -36,4 +36,5 @@ When the question link is clicked in fragment B, it has to display the website o
 During each loading a loading indicator has to be displayed and when the loading is done the indicator needs to be hidden. You can use whatever view or widget to indicate loading (I would recommend ProgressBar).
 
 ##5)
-Button “next” and button “previous” in fragment A which select pages forward and backwards. When the button is clicked, new request with the correct page number is made and new data loaded and displayed in the list.
+Button “next” and button “previous” in fragment A which select pages forward and backwards. When the button is clicked, new request with the correct page number is made and new data loaded and displayed in the list.  
+For example with single request you get 100 objects, but in total there are 500 objects, then you display 100 items in listview and pressing next would load next items 101-200.
